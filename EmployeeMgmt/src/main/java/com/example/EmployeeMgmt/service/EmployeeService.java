@@ -16,17 +16,21 @@ public class EmployeeService {
 	@Autowired
 	EmployeeRepository er;
 	
-	public Optional<Employee> getEmployee(String empId) {
+	public Employee getEmployee(String empId) {
 		// TODO Auto-generated method stub
-		Optional<Employee> e = er.findById(empId);
+		Employee e = er.findById(empId).get();
 		return e;
 	}
 
-	public void changeEmpPassword(String empId, String pass) {
+	public void changeEmpPassword(Employee emp, String empId) {
+		
 		// TODO Auto-generated method stub
 		if(er.existsById(empId)) {
-		Employee e = er.findByEmpId(empId);
-		e.setPassword(pass);
+			Employee e = er.findById(empId).get();
+			if(e.getPassword()!=null) {
+				e.setPassword(emp.getPassword());;
+			}
+			er.save(e);
 		}
 		
 	}
