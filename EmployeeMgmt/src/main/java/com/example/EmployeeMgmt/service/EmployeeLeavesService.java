@@ -14,9 +14,10 @@ public class EmployeeLeavesService {
 
 	@Autowired
 	EmployeeLeavesRepository elr;
-	public  Optional<EmployeeLeaves> viewLeaveStatus(String empId) {
+	public EmployeeLeaves viewLeaveStatus(int id) {
 		// TODO Auto-generated method stub
-		return elr.findById(empId);
+		return elr.findById(id).get();
 	}
+
 
 }
