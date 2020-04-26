@@ -18,8 +18,13 @@ public class EmployeeService {
 	
 	public Employee getEmployee(String empId) {
 		// TODO Auto-generated method stub
+		if(er.existsById(empId)) {
 		Employee e = er.findById(empId).get();
 		return e;
+		}
+		else {
+			return null;
+		}
 	}
 
 	public void changeEmpPassword(Employee emp, String empId) {
@@ -46,7 +51,6 @@ public class EmployeeService {
 		}
 		return s;
 	}
-
 	
 
 }
