@@ -16,8 +16,11 @@ public class EmployeeNoticeService {
 
 	public ArrayList<EmployeeNotice> viewEmpMsg(String empId) {
 		// TODO Auto-generated method stub
-		return enr.getEmpMsgByEmpId(empId);
+		ArrayList<EmployeeNotice> a = new ArrayList<EmployeeNotice>();
+		if(enr.existsById(empId)) {
+		a.add(enr.findById(empId).get());
+		}
+		return a;
 	}
-
 	
 }
