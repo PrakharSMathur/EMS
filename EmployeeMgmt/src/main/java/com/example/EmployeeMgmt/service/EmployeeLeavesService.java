@@ -16,8 +16,12 @@ public class EmployeeLeavesService {
 	EmployeeLeavesRepository elr;
 	public EmployeeLeaves viewLeaveStatus(int id) {
 		// TODO Auto-generated method stub
+		if(elr.existsById(id)) {
 		return elr.findById(id).get();
+		}
+		else {
+			return null;
+		}
 	}
-
 
 }
