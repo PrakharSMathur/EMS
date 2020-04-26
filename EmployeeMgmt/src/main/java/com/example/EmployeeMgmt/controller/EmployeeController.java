@@ -44,9 +44,12 @@ public class EmployeeController {
 	
 	@Autowired
 	EmployeeLeaveRequestService elrs;
-	
 
-		
+	//Default landing message
+	@RequestMapping("/")
+	String Employeehome() {
+		return "Welcome to Employee Home Page";
+	}
 	
 	//Change Password
 	@PutMapping("/changePassword/{empId}")

@@ -21,75 +21,86 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/Admin")
 public class AdminController {
-@Autowired
-  AdminService admin;
+    @Autowired
+    AdminService admin;
 
-  //GET request to get all details of all employees
-  @GetMapping("/GetAllEmployees")
-  public List<Employee> viewAllEmployees()
-  {
-    return admin.viewAllEmployees();
-  }
+    //All data to be sent in POST/PUT method requests, is expected in raw - application/JSON format.
+    //For JSON data formats, please refer the Employee and HR models
 
-  //GET request to get Employee details by Employee ID at path /Admin/GetEmpployee/{empId} 
-  @GetMapping("/GetEmployee/{empId}")
-  public Optional<Employee> getEmployee(@PathVariable String empId){ return admin.getEmployee(empId);  }
+    //Default , at path "~/Admin/"
+    @RequestMapping("/")
+    String Adminhome() {
+        return "Welcome to Admin Home Page";
+    }
 
-  //POST req to add New Employee, ID assigned automatically, rest data sent in raw-application/JSON format in body
-  @PostMapping("/AddEmployee")
-  public Serializable addStudentService(@RequestBody Employee employee) {
-    return admin.addEmployeeService(employee);
-  }
+    /*----------Employee-----------*/
 
-  //PUT req to update Employee details if ID exists
-  @PutMapping("/UpdateEmployee/{empId}")
-  public String updateEmployee(@RequestBody Employee employee,@PathVariable String empId){
-    return admin.updateEmployeeService(employee,empId);
-  }
+    //GET request to get all details of all employees
+    @GetMapping("/GetAllEmployees")
+    public List<Employee> viewAllEmployees() {
+        return admin.viewAllEmployees();
+    }
 
-  //DELETE req to delete one employee by empId
-  @DeleteMapping("/DeleteEmployee/{empId}")
-  public String deleteEmployee(@PathVariable String empId) {
-    return admin.deleteEmployeeService(empId);
-  }
+    //GET request to get Employee details by Employee ID at path /Admin/GetEmployee/{empId}
+    @GetMapping("/GetEmployee/{empId}")
+    public Optional<Employee> getEmployee(@PathVariable String empId) {
+        return admin.getEmployee(empId);
+    }
 
-  //List all details of all HRs
-  @GetMapping("/GetAllHRs")
-  public List<HR> viewAllHRs()
-  {
-    return admin.viewAllHRs();
-  }
+    //POST req to add New Employee, ID assigned automatically
+    @PostMapping("/AddEmployee")
+    public Serializable addStudentService(@RequestBody Employee employee) {
+        return admin.addEmployeeService(employee);
+    }
 
-  //List details of one HR by ID
-  @GetMapping("/GetHR/{hrId}")
-  public Optional<HR> getHR(@PathVariable String hrId){
-    return admin.getHR(hrId);
-  }
+    //PUT req to update Employee details if ID exists, updates only the fields provided with data
+    @PutMapping("/UpdateEmployee/{empId}")
+    public String updateEmployee(@RequestBody Employee employee, @PathVariable String empId) {
+        return admin.updateEmployeeService(employee, empId);
+    }
 
-  //List HR details by HR name
-  @GetMapping("/GetHRbyName/{name}")
-  public Optional<HR> getHRbyName(@PathVariable String name) { return admin.getHRbyName(name);}
+    //DELETE req to delete one employee by empId
+    @DeleteMapping("/DeleteEmployee/{empId}")
+    public String deleteEmployee(@PathVariable String empId) {
+        return admin.deleteEmployeeService(empId);
+    }
 
-  //Add new HR
-  @PostMapping("/AddHR")
-  public Serializable addHRService(@RequestBody HR hr) {
-    return admin.addHRService(hr);
-  }
+    //GET req to list all details of all HRs
+    @GetMapping("/GetAllHRs")
+    public List<HR> viewAllHRs() {
+        return admin.viewAllHRs();
+    }
 
-  //Delete HR by ID
-  @DeleteMapping("/DeleteHR/{hrId}")
-  public String deleteHR(@PathVariable String hrId) {
-    return admin.deleteHRService(hrId);
-  }
+    //GET req to list details of one HR by ID
+    @GetMapping("/GetHR/{hrId}")
+    public Optional<HR> getHR(@PathVariable String hrId) {
+        return admin.getHR(hrId);
+    }
 
-  //Update HR details by ID
-  @PutMapping("/UpdateHR/{hrId}")
-  public String updateHR(@RequestBody HR hr,@PathVariable String hrId){
-    return admin.updateHRService(hr,hrId);
-  }
+    //GET req to list HR details by HR name
+    @GetMapping("/GetHRbyName/{name}")
+    public Optional<HR> getHRbyName(@PathVariable String name) {
+        return admin.getHRbyName(name);
+    }
 
+    /*--------HR---------*/
 
+    //POST req to add new HR, ID assigned automatically
+    @PostMapping("/AddHR")
+    public Serializable addHRService(@RequestBody HR hr) {
+        return admin.addHRService(hr);
+    }
 
+    //DELETE req to delete HR by ID
+    @DeleteMapping("/DeleteHR/{hrId}")
+    public String deleteHR(@PathVariable String hrId) {
+        return admin.deleteHRService(hrId);
+    }
 
+    //PUT req to update HR details by ID, if exists; updates only the fields provided with data
+    @PutMapping("/UpdateHR/{hrId}")
+    public String updateHR(@RequestBody HR hr, @PathVariable String hrId) {
+        return admin.updateHRService(hr, hrId);
+    }
 
 }
