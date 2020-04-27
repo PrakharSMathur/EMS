@@ -32,7 +32,9 @@ public class AdminService {
 
     public Serializable addEmployeeService(Employee employee) {
         //Adding Employee details supplied with Auto-Generated ID
-        employee.setEmpId(SequenceGeneratorService.generateEmpIDSequence("employee_sequences"));
+        String NumStr = String.format("%04d", Integer.parseInt(SequenceGeneratorService.generateEmpIDSequence("employee_sequences")));
+        String val = "EM" + NumStr;
+        employee.setEmpId(val);
         employeeRepository.save(employee);
 
         //Adding default leaves
@@ -116,8 +118,9 @@ public class AdminService {
     }
 
     public Serializable addHRService(HR hr) {
-        hr.setId(SequenceGeneratorService.generateHrSequence("hr_sequences"));
-        System.out.print(hr.toString());
+        String NumStr = String.format("%04d", Integer.parseInt(SequenceGeneratorService.generateHrIDSequence("hr_sequences")));
+        String val = "HR" + NumStr;
+        hr.setHrId(val);
         hrRepository.save(hr);
 
         HRNotice hn =new HRNotice();
